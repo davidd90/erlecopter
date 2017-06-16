@@ -1,0 +1,109 @@
+
+#include <cstdlib>
+#include <string>
+
+#include <math.h>
+#include <ros/ros.h>
+#include <ros/console.h>
+#include <mavros_msgs/SetMode.h>
+#include <mavros_msgs/OverrideRCIn.h>
+#include <sensor_msgs/LaserScan.h>
+#include <geometry_msgs/PoseStamped.h>
+
+ros::Publisher pub;
+ros::Subscriber scanSub;
+ros::Publisher local_pos_pub;
+
+void processLaserScan(const sensor_msgs::LaserScan scan){
+
+	int size = scan.ranges.size();
+
+
+	double midRange = scan.ranges[320];
+
+	mavros_msgs::OverrideRCIn msg;
+
+
+	bool turn= false;
+	for( int i = 220; i < 420; i++){
+		if(!isnan(scan.ranges[i]) &&scan.ranges[i]<2.5){
+			turn = true;
+			break;
+		}
+	}
+		
+	
+	if(!turn){
+		/*
+            geometry_msgs::PoseStamped pose;
+    	    pose.pose.position.x = 20;
+            pose.pose.position.y = 20;
+   	    pose.pose.position.z = 100;
+            local_pos_pub.publish(pose);
+	
+	    */
+    	    msg.channels[0] = 1500;     //Roll
+	    msg.channels[1] = 1450;    //Pitch
+	    msg.channels[2] = 1500;   //Throttle
+	    msg.channels[3] = 1500;        //Yaw
+	    msg.channels[4] = 0;
+	    msg.channels[5] = 0;
+	    msg.channels[6] = 0;
+	    msg.channels[7] = 0;
+
+	    pub.publish(msg);
+	
+
+	}else{
+	    ROS_ERROR("Start turn");
+	    
+
+ 	    msg.channels[0] = 1500;     //Roll
+	    msg.channels[1] = 1500;    //Pitch
+	    msg.channels[2] = 1500;   //Throttle
+	    msg.channels[3] = 1600;        //Yaw
+	    msg.channels[4] = 0;
+	    msg.channels[5] = 0;
+	    msg.channels[6] = 0;
+	    msg.channels[7] = 0;
+
+	    pub.publish(msg); 
+    	   	
+	}
+}
+
+int main(int argc, char **argv)
+{
+
+    int rate = 10;
+
+    ros::init(argc, argv, "mavros_explore");
+    ros::NodeHandle n;
+
+    ros::Rate r(rate);
+
+    ////////////////////////////////////////////
+    ///////////////////EXPLORE//////////////////////
+    ////////////////////////////////////////////
+
+    ros::ServiceClient cl = n.serviceClient<mavros_msgs::SetMode>("/mavros/set_mode");
+    mavros_msgs::SetMode srv_setMode;
+    srv_setMode.request.base_mode = 0;
+    srv_setMode.request.custom_mode = "LOITER";
+    if(cl.call(srv_setMode)){
+        ROS_ERROR("setmode send ok %d value:", srv_setMode.response.success);
+    }else{
+        ROS_ERROR("Failed SetMode");
+        return -1;
+    }
+
+
+    pub = n.advertise<mavros_msgs::OverrideRCIn>("/mavros/rc/override", 10);
+
+    local_pos_pub = n.advertise<geometry_msgs::PoseStamped>
+            ("mavros/setpoint_position/local", 10);
+    scanSub =n.subscribe<sensor_msgs::LaserScan>("/scan",10,processLaserScan);
+  
+    ros::spin();
+}
+

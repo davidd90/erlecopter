@@ -1,0 +1,10 @@
+digraph G {
+"world" -> "base_link"[label="Broadcaster: /mavros\nAverage rate: 4.438 Hz\nMost recent transform: 58.292 ( 0.123 sec old)\nBuffer length: 3.605 sec\n"];
+"map" -> "world"[label="Broadcaster: /slam_gmapping\nAverage rate: 4.286 Hz\nMost recent transform: 58.500 ( -0.085 sec old)\nBuffer length: 3.500 sec\n"];
+"base_link" -> "camera_depth_frame"[label="Broadcaster: /tfLaser_broadcaster\nAverage rate: 4.283 Hz\nMost recent transform: 58.620 ( -0.205 sec old)\nBuffer length: 3.502 sec\n"];
+"base_link" -> "camera_depth_optical_frame"[label="Broadcaster: /tfPoints_broadcaster\nAverage rate: 4.286 Hz\nMost recent transform: 58.623 ( -0.208 sec old)\nBuffer length: 3.500 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 58.415"[ shape=plaintext ] ;
+ }->"map";
+}

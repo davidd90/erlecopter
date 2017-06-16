@@ -1,0 +1,25 @@
+# pack-refs with: peeled fully-peeled 
+5dc6d6a5c4e1453ada8fcf8fc54194580cad6070 refs/remotes/origin/feature/magnetometer
+26c73d6e4dc43b0b98f7d61e5d883e91da5545c5 refs/remotes/origin/feature/remove_glog_from_rotors_control
+28e1f61fb3d5c1d922053003890112c8aed5b978 refs/remotes/origin/feature/store_octree
+5969f74169f7f283eaa633c8d05fb1aee3803adf refs/remotes/origin/feature/test_camera_trajectory
+70d2d2390da4fc0ec65d6b8459a13ce18fccf86f refs/remotes/origin/fix/missing_cutoff_max
+d7cc1592ce512529d836c3f6695af4ed6d123225 refs/remotes/origin/master
+4314abd0efa9d880e03d2ce5a88de6b95ae2ab9f refs/remotes/origin/rebase_upstream
+5f7e52f05248caf1bc1c3f49435be7df0a1fbc2c refs/remotes/origin/rebase_v2
+f2194c6245a3d73caefb43b8ef5635cfb9975bc3 refs/remotes/origin/revert-219-feature/remove_glog_from_rotors_control
+89c722f77171c94b03b8f298e0344b866fb5e0c3 refs/remotes/origin/sonar_plugin
+4f41df1f845348df0e348d210c88525e53b9b99c refs/remotes/origin/stage_1_release
+5576d7bcdc49571226d6643703898c04905ccc45 refs/remotes/origin/upstream_merge
+752f58b175edaadee5364679ac8ca0343a577ce3 refs/tags/1.1.0
+cd8b8ac52fe25bbb2f2134f394e94ef700ee17ff refs/tags/1.1.1
+fdf6fea5c280d956d216a51f62682991e0dec073 refs/tags/1.1.2
+713d7b7434c9cd8ed0c167e53be905531331b953 refs/tags/1.1.3
+f66008457ec737ff5f7473e57cab08c14bbd2f4b refs/tags/1.1.4
+a65d61104f05f6e64a301fd7da14177fae5a323a refs/tags/1.1.5
+5f18023671f2172247bc92b07fecfa9fa672de9b refs/tags/1.1.6
+86e53c33d70f59a31883fcd820e8441852bff92a refs/tags/initial_distribution
+^4f41df1f845348df0e348d210c88525e53b9b99c
+fbc1c41572cf73e90f2aa7b4185e1ea6ebc1ac60 refs/tags/v1.0.0
+^c6c41d085c58a2c58e8d84dc95b056c361bf48c6
+e5136a47e54f2651ca8c4a42cd084ce5f1953c17 refs/tags/v1.0.1
